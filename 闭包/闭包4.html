@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	/*
+	闭包，就是有权访问另一个函数作用域中的变量的函数
+	闭包是一个特殊的对象，它由两部分组成，函数以及创建该函数的环境，环境由比吧创建时在作用域中的任何局部变量组成
+	*/
+
+	//创建闭包
+	function func() {
+		var a = 1, b = 2;
+
+		function closure() {
+			return a + b;
+		}
+
+		return closure;
+	}
+	//闭包的作用域链包含着它自己的作用域，以及包含它的函数的作用域和全局作用域。
+	/*
+	备注1：
+	通常，函数的作用于及其所有变量都会在执行结束后被销毁，但是，在创建了一个闭包之后，这个函数的作用域会一直保存在闭包不存在为止
+	*/
+	function makeAdder(x) {
+		var y = 3;
+		return function() {
+			return x + y;
+		}
+	}
+	var add5 = makeAdder(5);
+	var add10 = makeAdder(10);
+
+	console.log(add5());	//8
+	console.log(add10());	//13
+
+	add5 = null;
+	add10 = null;
+
+	/*
+	备注2：
+	闭包只能取得包含函数中任何变量的最后一个值，这是因为闭包所保存的是整个变量对象，而不是某个特殊的变量
+	*/
+	function test() {
+		var arr = [];
+		for (var i = 0; i < 10; i++) {
+			arr[i] = function() {
+				return i;
+			}
+		}
+		for (var a = 0; a < 10; a++) {
+			console.log(arr[a]());
+		}
+	}
+	test();//输出10个10
+	//修改代码
+	function test2() {
+		var arr = [];
+		for (let i = 0; i < 10; i++) {
+			arr[i] = function() {
+				return i;
+			}
+		}
+		for (var a = 0; a < 10; a++) {
+			console.log(arr[a]());
+		}
+
+	}
+	test2();
+
+	/*
+	备注3：
+	闭包中的this对象
+	*/
+	name = "The Window";
+
+		var object = {
+			name:"My object",
+			getNameFunc:function() {
+				return function() {
+					return this.name;
+				}
+			}
+		}
+
+		var object2 = {
+			name:"My object2",
+			getNameFunc:function() {
+				var that = this;
+				return function() {
+					return that.name;
+				}
+			}
+		}
+
+		alert(object.getNameFunc()());	//"The Window"
+		alert(object2.getNameFunc()());	//"My object2"
+		//匿名函数的执行环境具有全局性，因此其this对象通常指向window
+
+		/*
+		闭包的应用：设计私有的方法和变量
+		任何在函数中定义的变量，都可以认为是私有变量，因为不能再函数外部访问这些变量。私有变量包括函数的参数、局部变量和函数内定义的其他函数
+		*/
+		//特权方法：有权访问私有变量的公有方法
+		function Animal() {
+			//私有变量
+			var series = "哺乳动物";
+
+			function run() {
+				console.log("Run!");
+			}
+
+			//特权方法
+			this.getSeries = function() {
+				return series;
+			}
+		}
+
+		/*
+		模块模式：为单例创建私有变量和方法
+		单例：指的是只有一个实例的对象，js一般以对象字面量的方式来创建一个单例对象
+		*/
+		//普通模式创建单例
+		var singleton = {
+			name:"percy",
+			speak:function() {
+				console.log("speaking!");
+			},
+			getName: function() {
+				return this.name;
+			}
+		}
+		//模块模式创建单例
+		var singleton2 = (function() {
+			//私有变量
+			var age = 22;
+			var speak = function() {
+				console.log("speaking!");
+			};
+
+			//特权方法
+			return {
+				name:"percy",
+				getAge: function() {
+					return age;
+				}
+			}
+		})();
+
+		/*
+		匿名函数的最大用途是创建闭包，并且还可以构建命名空间，以减少全局变量的使用，从而使用闭包模块化代码，减少全局变量的污染
+		*/
+		var objEvent = objEvent||{};
+		(function() {
+			var addEvent = function() {
+				//some code
+			};
+			function removeEvent() {
+				//some code
+			}
+
+			objEvent.addEvent = addEvent;
+			objEvent.removeEvent = removeEvent;
+		})()
+		//这段代码中addEvent和removeEvent都是局部变量，但是我们可以通过全局变量objEvent使用它，这就大大减少了全局变量的使用，增强了网页的安全性
+
+
+		/*
+		例子：闭包计数器
+		*/
+		var countNumber = (function() {
+			var num = 0;
+			return function() {
+				return ++num;
+			}
+		})();
+		console.log(countNumber());	//1
+		console.log(countNumber());	//2
+
+		/*
+		闭包的缺陷：
+		闭包的缺点就是常驻内存会增大内存使用量，并且使用不当很容易造成内存泄漏
+		如果不是一味某些特殊任务而需要闭包，在没有必要的情况下，在其他函数中创建函数是不明智的，应为闭包对脚本性能具有负面影响，包括处理速度和内存消耗
+		*/
+
+
+		function fun(n,o){
+  			console.log(o);
+  			return {
+    			fun: function(m){
+      				return fun(m,n);
+    			}
+  			};
+		}
+
+		var a = fun(0);  // ?
+		a.fun(1);        // ?
+		a.fun(2);        // ?
+		a.fun(3);        // ?
+
+		var b = fun(0).fun(1).fun(2).fun(3);  // ?
+
+		var c = fun(0).fun(1);  // ?
+		c.fun(2);        // ?
+		c.fun(3);        // ?
+</script>
+</html>

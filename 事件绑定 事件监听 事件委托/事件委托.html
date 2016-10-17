@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	#curvedarrow {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 9px solid red;
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -ms-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+}
+#curvedarrow:after {
+  content: "";
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 3px solid red;
+  border-radius: 20px 0 0 0;
+  top: -12px;
+  left: -9px;
+  width: 12px;
+  height: 12px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+
+#yin-yang {
+    width: 96px;
+    height: 48px;
+    background: #eee;
+    border-color: red;
+    border-style: solid;
+    border-width: 2px 2px 50px 2px;
+    border-radius: 100%;
+    position: relative;
+}
+
+#yin-yang:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: #eee;
+    border: 18px solid red;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+}
+
+#yin-yang:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: red;
+    border: 18px solid #eee;
+    border-radius:100%;
+    width: 12px;
+    height: 12px;
+}
+</style>
+</head>
+<body>
+<!-- <div id="curvedarrow"></div> -->
+<div id="yin-yang"></div>
+	<ul id="ul1">
+		<li>1111</li>
+		<li>2222</li>
+		<li>3333</li>
+		<li>4444</li>
+		<li>5555</li>
+	</ul>
+	<ul id="ul2">
+		<li>aaa</li>
+		<li>bbb</li>
+		<li>ccc</li>
+		<li>ddd</li>
+		<li>eee</li>
+	</ul>
+	<script type="text/javascript">
+		//事件委托，就是利用冒泡的原理，把事件加到父元素或祖先元素上，触发执行效果
+		//传统写法
+		var oUl1 = document.getElementById('ul1');
+		var items1 = oUl1.getElementsByTagName('li');
+		for (var i = 0; i < items1.length; i++) {
+			items1[i].onclick = function(){
+				alert(this.innerHTML);
+			};
+		}
+		//事件委托
+		var oUl2 = document.getElementById('ul2');
+		var items2 = oUl2.getElementsByTagName('li');
+		document.addEventListener("click",function(ev){
+			var target = ev.target;
+			if(target.nodeName == "LI"){
+				alert(target.innerHTML);
+			}
+		})
+		//此种方式如果动态添加元素，新添加的元素也可以执行
+	</script>
+</body>
+</html>

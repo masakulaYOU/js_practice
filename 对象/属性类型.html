@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//ECMAScript中有两种属性：数据属性和访问器属性
+	/*
+	数据属性
+	包含一个数据值的位置，这个位置可以读取和写入数据，数据属性有4个描述其行为的特性
+	[[Configurable]]:表示能否通过delete删除属性从而重新定义属性，能够修改属性的特性，或者能否把属性修改为访问器属性
+	[[Enumerable]]:表示能否通过for-in循环返回属性
+	[[Writable]]:表示能否修改属性的值
+	[[Value]]:包含这个属性的数据值
+	*/
+	//要修改默认的特性，必须使用ECMAScript5的Object.defineProperty()方法，这个方法接收三个参数：属性所在的对象，属性的名字和一个描述符对象，其中描述符对象的属性必须是configurable enumerable writable和value，设置其中的一个或多个值，可以修改对应的特性值
+	var person3 = {};
+	Object.defineProperty(person3,"name", {
+		writable: false,
+		value: "Nicholas"
+	});
+
+	alert(person3.name);
+	person3.name = "Greg";
+	alert(person3.name);
+</script>
+</html>

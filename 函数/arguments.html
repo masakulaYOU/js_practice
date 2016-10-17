@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//Arguments对象
+	//Arguments对象是一个伪数组对象，可以使用arguments[i]来访问对象中的元素，但不能用数组的一些方法
+	/*
+	length属性
+	表示function函数实际所传的参数的个数
+	函数名.length表示函数期望的传参个数
+	*/
+	function argsText(a,b,c){
+		var t = arguments.length;
+		var e = argsText.length;
+
+		console.log(t);
+		console.log(e);
+	}
+	argsText(11,12);		//2 3
+	argsText(11,12,13);		//3 3
+	argsText(11,12,13,14);	//4 3
+
+	/*
+	参数访问
+	可以使用arguments[i]来访问函数所传的参数
+	*/
+	function argsView(a,b,c) {
+		var arg = [];
+		for (var i = 0; i < arguments.length; i++) {
+			arg.push(arguments[i]);
+		}
+		console.log(arg);
+	}
+	argsView(11,12);		//[11,12]
+	argsView(11,12,13);		//[11,12,13]
+	argsView(11,12,13,14);	//[11,12,13]
+
+	/*
+	callee调用
+	callee属性可以调用函数本身，当函数正在执行时才能调用，可实现递归
+	*/
+	function calleeTest(a,b,c) {
+		var e = arguments.callee.toString(); //calleeTest.toString()
+		console.log(e);
+	}
+	calleeTest();			//打印出函数本身
+
+	/*
+	caller属性
+	可以指向当前函数的调用者，当调用者函数正在执行时才能调用
+	*/
+	function callerTest() {
+		if (callerTest.caller) {
+			var caller = callerTest.caller.toString();
+			console.log(caller);
+		} else {
+			console.log("no caller");
+		}
+	}
+	function handler() {
+		callerTest();
+	}
+	function handlerToHandler() {
+		handler();
+	}
+	callerTest();			//"no caller"
+	handler();				//handlder
+	handlerToHandler();		//handlder
+</script>
+</html>

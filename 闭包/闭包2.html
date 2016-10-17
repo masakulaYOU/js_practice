@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	window.onload = function() {
+		function createArray() {
+			var result = new Array();
+			for (var i = 0; i < 10; i++) {
+				result[i] = function() {
+					return i;
+				}
+			}
+			return result;
+		}
+
+		function createArray2()  {
+			var result = new Array();
+			for (var i = 0; i < 10; i++) {
+				result[i] = function(num) {
+					return function() {
+						return num;
+					}
+				}(i);
+			}
+			return result;
+		}
+
+		function createArray3() {
+			var result = new Array();
+			for (let i = 0; i < 10; i++){
+				result[i] = function() {
+					return i;
+				}
+			}
+			return result;
+		}
+		var arr1 = createArray();
+		var arr2 = createArray2();
+		var arr3 = createArray3();
+		alert(arr1[3]());
+		alert(arr2[3]());
+		alert(arr3[3]());
+		//闭包只能取得包含函数中任何变量的最后一个值，这是因为闭包所保存的是整个变量对象，而不是某个特殊的变量。
+	}
+</script>
+</html>

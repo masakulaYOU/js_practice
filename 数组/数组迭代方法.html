@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	/*
+	接受两个参数，一个是运行该函数的作用域对象
+	第一个参数函数接受三个参数  数组的项的值item 值的位置index 数组本身array
+	every():都是返回true则返回true
+	some():有一个返回true则返回true
+	forEach():没有返回值
+	filter():返回该函数会返回true的项组成的数组，用于过滤
+	map():返回每个函数的返回值
+	*/
+
+	//every()
+	var nums = [1,2,3,4,5,6,7,8,9];
+	var everyArr = nums.every(function(it, index, arr) {
+		if(it > 3){
+			return true;
+		}
+	})
+	console.log(everyArr);//false
+
+	//some()
+	var someArr = nums.some(function(it, index, arr) {
+		return (it > 3);
+	})
+	console.log(someArr);//true
+
+	//forEach()
+	var forEachArr = nums.forEach(function(it, index, arr) {
+		var it = it*100;
+		console.log(it);
+	})
+
+	//filter()
+	var filterArr = nums.filter(function(it, index, arr) {
+		if (it > 4){
+			return it;
+		}
+	})
+	console.log(filterArr); //[5,6,7,8,9]
+
+	//map()
+	var mapArr = nums.map(function(it, index, arr) {
+		var it=it*100;
+		return it;
+	})
+	console.log(mapArr);
+</script>
+</html>

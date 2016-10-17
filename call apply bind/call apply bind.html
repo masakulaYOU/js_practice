@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	/*
+	方法定义
+	*/
+
+	/*
+	call方法
+	语法：call([thisObj[,arg1[,arg2[,[,..argN]]]]])
+	定义：调用一个对象的一个方法，以另一个对象替换当前对象
+	说明：call方法可以用来替代另一个对象调用一个方法，call方法可以将一个函数的对象上下文从出事的上下文改变为由thisObj指定的新对象，如果没有提供thisObj对象，那么Global对象被用作thisObj
+	*/
+
+	/*
+	apply方法
+	语法：apply([thisObj[,argArray]])
+	定义：应用某一对象的一个方法，用另一个对象替换当前对象
+	说明：apply的第一个参数thisObj与call方法的一样，第二个参数argArray为一个传参数组，thisObj如果未传，那么Global对象呗被用作thisObj
+	*/
+
+	/*
+	bind方法
+	在ES5中扩展了bind方法，IE6,7,8不支持
+	语法：bind([thisObj[,arg1[,arg2[,[,..argN]]]]])
+	定义：应用某一对象的一个方法，用另一个对象替换当前对象
+	说明：bind的thisObj参数和call一样，thisObj如果未传，那么Global对象被用作thisObj，参数arg如果不传，可以在调用的时候再传，如果传了，调用的时候则可以不传，传了也不生效
+	*/
+	var person = {
+		name:"ly",
+		age:22,
+		sayHello:function(age) {
+			console.log(this.name);
+			console.log(age);
+		}
+	}
+
+	var son = {
+		name:"ss"
+	}
+
+	var boundFunc = person.sayHello.bind(son);
+	boundFunc(25);									//"ss" 25
+	var boundFunc2 = person.sayHello.bind(son,25);
+	boundFunc2();									//"ss" 25
+	boundFunc2(30);									//"ss" 25
+</script>
+</html>

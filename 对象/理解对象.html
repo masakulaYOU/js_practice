@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//创建自定义对象的最简单的方式就是创建一个Object的实例，然后为他添加属性和方法
+	var person = new Object();
+	person.name = "Nicholas";
+	person.age = 29;
+	person.job = "Software Engineer";
+
+	person.sayName = function() {
+		console.log(this.name);
+	}
+	//使用对象字面量语法
+	var person2 = {
+		name:"Nicholas",
+		age:29,
+		job:"Software Engineer",
+		sayName: function() {
+			console.log(this.name);
+		}
+	}
+</script>
+</html>

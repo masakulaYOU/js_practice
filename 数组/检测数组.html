@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	/*
+	方法：instanceof
+	*/
+	if (value instanceof Array){
+		//对数组进行某些操作
+	}
+	/*
+	问题：它假定只有一个全局执行环境，但是如果网页中包含多个框架，那实际上就存在多个全局环境，从而存在多种不同的构造函数，如果一个框架向另一个框架传入一个数组，那么传入的数组在与第二个框架中原生创建的数组分别具有不同的构造函数
+	*/
+
+	/*
+	方法：Array.isArray()
+	*/
+	if (Array.isArray(value)){
+		//对数组进行某些操作
+	}
+	//兼容性：IE9+ FF4+ Safari 5+ Opera10.5+ chrome
+</script>
+</html>

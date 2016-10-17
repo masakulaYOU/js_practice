@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<input type="button" value="click" id="btn">
+</body>
+<script type="text/javascript">
+	function addEvent(target, type, fn){
+		if (target.addEventListener) {
+			target.addEventListener(type, fn);
+		} else {
+			target.attachEvent("on" + type, fn);
+		}
+	}
+
+	function removeEvent(target,type,fn){
+		if (target.removeEventListener) {
+			target.removeEventListener(type, fn);
+		} else {
+			target.detachEvent("on" + type, fn);
+		}
+	}
+
+	var Btn = document.getElementById('btn');
+	addEvent(Btn,"click",hello);
+	function hello() {
+		alert("hello");
+	}
+</script>
+</html>
