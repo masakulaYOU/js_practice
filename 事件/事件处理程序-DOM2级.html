@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <input type="button" value="click" id="btn">
+	<input type="button" value="removeMouseover" id="btn2">
+</body>
+<script type="text/javascript">
+	//addEventListener()
+	//removeEventListener()
+	//参数：要处理的事件名，作为事件处理程序的函数和一个布尔值
+	//true:在捕获阶段调用事件处理程序
+	//false:在冒泡阶段调用事件处理程序
+	var btn = document.getElementById("btn");
+	var btn2 = document.getElementById("btn2");
+	btn.addEventListener("click",function(){
+		alert(this.id);
+	},true);
+	btn.addEventListener("click",function(){
+		alert("hello");
+	},false);
+	btn.addEventListener("mouseover", turnRed, true);
+	btn.addEventListener("mouseout", turnDefault, true);
+	function turnRed(){
+		btn.style.background = "red";
+	}
+	function turnDefault(){
+		btn.style.background = "";
+	}
+	//btn hello
+
+	//用addEventListener()添加的事件处理程序只能用removeEventListener()来移除
+	//移除时传入的参数与添加处理程序时使用的参数相同，因此通过addEventListener()添加的匿名函数不能删除
+	btn2.onclick = function(){
+		btn.removeEventListener("click",function(){
+			alert(this.id);
+		},true);
+		//不好使
+		btn.removeEventListener("mouseover", turnRed,true);
+	}
+	
+</script>
+</html>
