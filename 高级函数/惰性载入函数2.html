@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>惰性载入函数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 方法2：在声明函数时就指定适当的函数
+  var createXHR = (function(){
+    if (typeof XMLHttpRequest != "undefined") {
+      return function(){
+        return new XMLHttpRequest();
+      }
+    } else if (typeof ActiveXObject != "undefined"){
+      if (typeof arguments.callee.activeXString != "string") {
+        var versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.3.0", "MSXML2.XMLHttp"],
+            i, len;
+        for(var i =0, len = versions.length; i < len; i++){
+          try {
+            new ActiveXObject(versions[i]);
+            arguments.callee.activeXString = version[i];
+            break;
+          } catch(ex){
+            // skips
+          }
+        }
+        return new ActiveXObject(arguments.callee.activeXString)
+      }
+    } else {
+      return function(){
+        throw new Error("No XHR object acailable");
+      }
+    }
+  })()
+</script>
+</html>

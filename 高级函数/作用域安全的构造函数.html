@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>作用域安全的构造函数</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+   当构造函数和new关键字连用时，会创建一个新的对象，然后把属性值赋给这个对象
+   当没有new关键字时，this会映射到window上，导致错误对象属性的意外添加
+  */
+  var Person = function(name, age, job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+  }
+
+  var person1 = new Person("alen", 19, "doctor");
+  console.log(person1.name , person1.age, person1.job); //alen 19 doctor
+
+  var person2 = Person("Bob", 20, "teacher");
+  console.log(window.name, window.age, window.job); //Bob 20 teacher
+
+  /*
+  作用域安全的构造函数在进行任何更改前，首先确认this对象是正确类型的实例
+  */
+  var  People = function(name, age, job){
+    if(this instanceof People){
+      this.name = name;
+      this.age = age;
+      this.job = job;
+    } else {
+      return new People(name, age, job);
+    }
+  }
+</script>
+</html>

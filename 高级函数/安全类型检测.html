@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>安全的类型检测</title>
+</head>
+<body>
+  
+</body>
+<script>
+  /*
+    调用Object原生的toString方法，都会返回一个[Object NativeConstructorName]格式的字符串
+  */
+  function isArray(value){
+    return Object.prototype.toString.call(value) == "[object Array]";
+  }
+  var a = [1,2,3];
+  alert(isArray(a)); //true
+  var b = {a:1,b:2}
+  alert(isArray(b)); //false
+
+  //如果使用构造函数窃取模式的继承且不使用原型链，则继承可能会被破坏
+</script>
+</html>
